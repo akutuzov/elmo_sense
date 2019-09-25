@@ -24,7 +24,7 @@ if __name__ == '__main__':
     vect_dict = {}
     with open(vocab_path, 'r') as f:
         # for line in f.readlines():
-        for line in f.readlines()[100:1500]:
+        for line in f.readlines()[200:1500]:
             (word, freq) = line.strip().split('\t')
             if len(word) > 2 and word.isalpha():
                 vect_dict[word] = np.zeros((int(freq), vector_size))
@@ -67,8 +67,14 @@ if __name__ == '__main__':
     print('ELMo embeddings for your input are ready', file=sys.stderr)
 
     words2save = sorted([w for w in vect_dict.keys() if vect_dict[w].size != 0])
-    arrnames = {word: vect_dict[word] for word in words2save}
+    # arrnames = {word: vect_dict[word] for word in words2save}
 
-    np.savez_compressed(args.outfile, **arrnames)
+    for word in words2save:
+        try:
+            np.savez_compressed(args.outfile + word, vect_dict[word])
+        except:
+            print(word, 'failed', file=sys.stderr)
+            continue
+    #np.savez_compressed(args.outfile, **arrnames)
 
     print('Vectors saved to', args.outfile, file=sys.stderr)
