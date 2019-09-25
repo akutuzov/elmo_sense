@@ -3,14 +3,14 @@
 
 import argparse
 import sys
-import numpy as np
-import os
 from elmo_helpers import *
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     arg = parser.add_argument
     arg('--input', '-i', help='Path to directory with npz files', required=True)
+    parser.add_argument('--mode', '-m', default='centroid', required=True,
+                        choices=['centroid', 'pairwise'])
 
     args = parser.parse_args()
     data_path = args.input
@@ -27,7 +27,10 @@ if __name__ == '__main__':
     print('Loaded an array of %d entries' % len(array), file=sys.stderr)
 
     for word in array:
-        var_coeff = diversity(array[word])
+        if args.mode == 'pairwise':
+            var_coeff = pairwise_diversity(array[word])
+        else:
+            var_coeff = diversity(array[word])
         print(word+'\t', var_coeff)
 
     print('Variation coefficients produced', file=sys.stderr)

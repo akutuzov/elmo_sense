@@ -6,6 +6,7 @@ import re
 import numpy as np
 import tensorflow as tf
 from scipy.spatial.distance import cosine
+from scipy.spatial.distance import pdist
 
 from bilm import Batcher, BidirectionalLanguageModel, weight_layers
 
@@ -76,6 +77,11 @@ def divide_chunks(data, n):
 def diversity(matrix):
     mean = np.average(matrix, axis=0)
     distances = [cosine(v, mean) for v in matrix]
+    return np.mean(distances)
+
+
+def pairwise_diversity(matrix):
+    distances = pdist(matrix, metric='cosine')
     return np.mean(distances)
 
 
