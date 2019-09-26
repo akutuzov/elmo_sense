@@ -18,6 +18,8 @@ if __name__ == '__main__':
     arg = parser.add_argument
     arg('--input', '-i', help='Path to output pickle', required=True)
     arg('--norm', '-n', help='Normalize vectors?', default=False, action='store_true')
+    parser.add_argument('--mode', '-m', default='centroid', required=True, choices=['centroid', 'pairwise'])
+
     # arg('--tagger', '-t', help='Path to UDPipe model', required=True)
 
     parser.set_defaults(norm=False)
@@ -47,7 +49,10 @@ if __name__ == '__main__':
 
     vectors = None
 
-    diversities = {w: diversity(representations[w]) for w in representations}
+    if args.mode == 'centroid':
+        diversities = {w: diversity(representations[w]) for w in representations}
+    else:
+        diversities = {w: pairwise_diversity(representations[w]) for w in representations}
 
     ambig_freqs = [freq_dict[w] for w in ambig_words]
     mean_amb_freq = np.mean(ambig_freqs)
@@ -59,8 +64,8 @@ if __name__ == '__main__':
     diversities_ambig = [diversities[w] for w in diversities if w in ambig_words]
     # print(ambig_words)
 
-    common_words_test = [w for w in diversities if w not in ambig_words]
-                         # and 100 < freq_dict[w] < 400]
+    common_words_test = [w for w in diversities if w not in ambig_words
+                         and 100 < freq_dict[w] < 400]
     # common_tagged = [tag(pipeline, w) for w in common_words_test]
     # common_words_test = [w.split('_')[0] for w in common_tagged if w.endswith('_NOUN')]
     # common_words_test = {w for w in common_words_test if w in diversities}
