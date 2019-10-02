@@ -9,8 +9,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     arg = parser.add_argument
     arg('--input', '-i', help='Path to directory with npz files', required=True)
-    parser.add_argument('--mode', '-m', default='centroid', required=True,
-                        choices=['centroid', 'pairwise'])
+    parser.add_argument('--mode', '-m', default='centroid', choices=['centroid', 'pairwise'])
 
     args = parser.parse_args()
     data_path = args.input
@@ -27,6 +26,9 @@ if __name__ == '__main__':
     print('Loaded an array of %d entries' % len(array), file=sys.stderr)
 
     for word in array:
+        if array[word].shape[0] < 10:
+            print(word, 'omitted because of low frequency:', array[word].shape[0], file=sys.stderr)
+            continue
         if args.mode == 'pairwise':
             var_coeff = pairwise_diversity(array[word])
         else:
