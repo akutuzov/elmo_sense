@@ -14,7 +14,7 @@ if __name__ == '__main__':
     all_coeffs = {}
 
     for f in files2process:
-        name = f.split('/')[1].split('_')[0]
+        name = f.split('/')[-1].split('_')[0]
         all_coeffs[name] = {}
         with open(f) as inp:
             for l in inp.readlines():
@@ -105,5 +105,18 @@ if __name__ == '__main__':
     plot.legend(loc='best')
     # plot.show()
     plot.savefig('elmo_dia_interesting.png', dpi=300)
+    plot.close()
+    plot.clf()
+
+    plot.clf()
+    for word in words:
+        plot.plot(int_years, coeffs[word], label=word)
+    plot_title = 'Sharpest changes in words ambiguity'
+    plot.title(plot_title)
+    plot.xticks(int_years)
+    plot.xlabel('Decades')
+    plot.ylabel('ELMo variation coefficients')
+    # plot.show()
+    plot.savefig('elmo_dia_all.png', dpi=300)
     plot.close()
     plot.clf()
