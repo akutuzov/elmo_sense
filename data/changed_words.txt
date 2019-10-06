@@ -1,0 +1,5 @@
+camera	1970
+cell	2000
+computer	1970,1990
+network	1990
+phone	1980,1990
