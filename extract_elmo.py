@@ -24,7 +24,7 @@ if __name__ == '__main__':
     vect_dict = {}
     with open(vocab_path, 'r') as f:
         # for line in f.readlines():
-        for line in f.readlines()[200:1500]:
+        for line in f.readlines():
             (word, freq) = line.strip().split('\t')
             if len(word) > 2 and word.isalpha():
                 vect_dict[word] = np.zeros((int(freq), vector_size))
@@ -46,7 +46,7 @@ if __name__ == '__main__':
         lines_cache = []
         with open(data_path, 'r') as dataset:
             for line in dataset:
-                lines_cache.append(line.strip().split()[:400])
+                lines_cache.append(line.strip().split()[:500])
                 lines_processed += 1
                 if len(lines_cache) == batch_size:
                     elmo_vectors = get_elmo_vectors(sess, lines_cache, batcher,
