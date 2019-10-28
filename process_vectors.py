@@ -11,14 +11,13 @@ from elmo_helpers import *
 import sys
 from nltk.corpus import wordnet as wn
 
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     arg = parser.add_argument
     arg('--input', '-i', help='Path to output pickle', required=True)
     arg('--norm', '-n', help='Normalize vectors?', default=False, action='store_true')
-    parser.add_argument('--mode', '-m', default='centroid', required=True, choices=['centroid', 'pairwise'])
+    parser.add_argument('--mode', '-m', default='centroid', required=True,
+                        choices=['centroid', 'pairwise'])
 
     # arg('--tagger', '-t', help='Path to UDPipe model', required=True)
 
@@ -91,7 +90,6 @@ if __name__ == '__main__':
     print('===================')
     common_diversities = {w: diversities[w] for w in common_words_test}
     for word in sorted(common_diversities, key=common_diversities.get, reverse=True):
-        # print(word, round(common_diversities[word], 3), len(wn.synsets(word)))
         synsets = len(wn.synsets(word))
         if synsets > 0:
             diversity_degrees.append(common_diversities[word])

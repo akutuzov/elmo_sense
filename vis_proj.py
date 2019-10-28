@@ -4,7 +4,6 @@
 import sys
 import pylab as plot
 import numpy as np
-from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 
 if __name__ == '__main__':
