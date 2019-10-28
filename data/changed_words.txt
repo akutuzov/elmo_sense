@@ -1,5 +1,5 @@
 camera	1970
-cell	2000
+cell	2000    both good!
 computer	1970,1990
-network	1990
+network	1990    no90s
 phone	1980,1990

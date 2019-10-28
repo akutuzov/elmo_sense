@@ -3,6 +3,7 @@
 
 import sys
 import pylab as plot
+from matplotlib.ticker import StrMethodFormatter
 from smart_open import open
 from operator import itemgetter
 import numpy as np
@@ -41,17 +42,20 @@ if __name__ == '__main__':
 
     int_years = [int(y) for y in years]
 
+    interesting_words = set()
     for data in [coeffs]:
-        diversified = [w for w in data.keys()
+        diversified = [(w, data[w][4] - data[w][0]) for w in data.keys()
                        if data[w][0] < data[w][1] < data[w][2] < data[w][3] < data[w][4]]
-        specialized = [w for w in data.keys()
+        specialized = [(w, data[w][0] - data[w][4]) for w in data.keys()
                        if data[w][0] > data[w][1] > data[w][2] > data[w][3] > data[w][4]]
-        # for i in diversified:
-        #    print(i, data[i])
-        # print('==========')
-        # for i in specialized:
-        #    print(i, data[i])
-        # print('=============')
+        for i in sorted(diversified, key=itemgetter(1), reverse=True)[:10]:
+            print(i[1], i[0], data[i[0]])
+            interesting_words.add(i[0])
+        print('==========')
+        for i in sorted(specialized, key=itemgetter(1), reverse=True)[:10]:
+            print(i[1], i[0], data[i[0]])
+            interesting_words.add(i[0])
+        print('=============')
 
     changes = []
 
@@ -61,16 +65,15 @@ if __name__ == '__main__':
             out = (word, (years[i], years[i + 1]), diff)
             changes.append(out)
 
-    interesting_words = set()
     sorted_changes = [d for d in sorted(changes, key=itemgetter(2), reverse=True)]
     for i in sorted_changes[:5]:
         print(i)
-        interesting_words.add(i[0])
+        # interesting_words.add(i[0])
     print('=============')
     for i in sorted_changes[-5:]:
         print(i)
-        interesting_words.add(i[0])
-
+        # interesting_words.add(i[0])
+    print('=============')
     year_changes = {}
     for el in changes:
         if el[1] not in year_changes:
@@ -84,15 +87,18 @@ if __name__ == '__main__':
 
     plot.clf()
     plot.bar(range(len(sorted_doubles)), [np.mean(year_changes[year]) for year in sorted_doubles],
-             tick_label=double_labels)
-    plot_title = 'Average changes in lexical ambiguity per decade'
+             tick_label=double_labels, color='red')
+    plot_title = 'Average changes in the 1980s lexical ambiguity per model'
     plot.title(plot_title)
     plot.xticks()
-    plot.xlabel('Transitions between decades')
+    plot.xlabel('Transitions between incremental ELMo models')
     plot.ylabel('Change in the average ELMo variation coefficients')
+    plot.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.4f}'))
     plot.savefig('elmo_dia_years.png', dpi=300)
     plot.close()
     plot.clf()
+
+    interesting_words = {'cell', 'phone'}
 
     plot.clf()
     for word in sorted(interesting_words):
@@ -111,7 +117,7 @@ if __name__ == '__main__':
     plot.clf()
     for word in words:
         plot.plot(int_years, coeffs[word], label=word)
-    plot_title = 'Sharpest changes in words ambiguity'
+    plot_title = 'Changes in word ambiguity over time'
     plot.title(plot_title)
     plot.xticks(int_years)
     plot.xlabel('Decades')
