@@ -26,7 +26,7 @@ if __name__ == '__main__':
     print('Loaded an array of %d entries' % len(array), file=sys.stderr)
 
     for word in array:
-        if array[word].shape[0] < 10:
+        if array[word].shape[0] < 3:
             print(word, 'omitted because of low frequency:', array[word].shape[0], file=sys.stderr)
             continue
         if args.mode == 'pairwise':
