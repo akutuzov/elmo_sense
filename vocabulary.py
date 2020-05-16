@@ -1,19 +1,20 @@
 #!/projects/ltg/python3/bin/python3
 import sys
+from nltk.corpus import wordnet as wn
+from collections import Counter
 
-THRESHOLD = int(sys.argv[1])
-
-words = {}
+words = Counter()
 
 for line in sys.stdin:
     res = line.strip().split()
     for word in res:
-        if word not in words:
-            words[word] = 0
-        words[word] += 1
+        synsets = len(wn.synsets(word))
+        if synsets > 0:
+            words.update([word])
 
 print('Vocabulary:', len(words), file=sys.stderr)
 
-a = sorted(words, key=words.get, reverse=True)[:THRESHOLD]
+a = sorted(words, key=words.get, reverse=True)
 for w in a:
-    print(w + '\t' + str(words[w]))
+    if words[w] > 2:
+        print(w + '\t' + str(words[w]))
