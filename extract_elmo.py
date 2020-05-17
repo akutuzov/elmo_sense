@@ -35,7 +35,7 @@ if __name__ == '__main__':
     vect_dict = {}
     with open(vocab_path, 'r') as f:
         for line in f.readlines():
-            word = line.strip()
+            word = line.strip().split('\t')[0]
             vect_dict[word] = 0
 
     logger.info('Words to test: %d' % len(vect_dict))
@@ -50,12 +50,11 @@ if __name__ == '__main__':
                     vect_dict[word] += 1
                     wordcount += 1
     logger.info('Total occurrences of target words: %d' % wordcount)
-    logger.info(vect_dict)
+    # logger.info(vect_dict)
 
     # Loading a pre-trained ELMo model:
     # You can call load_elmo_embeddings() with top=True to use only the top ELMo layer
-    batcher, sentence_character_ids, elmo_sentence_input, vector_size = load_elmo_embeddings(
-        args.elmo, top=use_top)
+    batcher, sentence_character_ids, elmo_sentence_input, vector_size = load_elmo_embeddings(args.elmo, top=use_top)
 
     vect_dict = {word: np.zeros((int(vect_dict[word]), vector_size)) for word in vect_dict}
     target_words = set(vect_dict)
@@ -64,9 +63,9 @@ if __name__ == '__main__':
 
     # Actually producing ELMo embeddings for our data:
     lines_processed = 0
-    with tf.compat.v1.Session() as sess:
+    with tf.Session() as sess:
         # It is necessary to initialize variables once before running inference.
-        sess.run(tf.compat.v1.global_variables_initializer())
+        sess.run(tf.global_variables_initializer())
 
         if args.warmup == 'yes':
             w_lines_cache = []
