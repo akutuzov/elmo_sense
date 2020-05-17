@@ -275,7 +275,6 @@ pub	138
 design	138
 subject	137
 report	137
-1	137
 name	137
 student	137
 black	136
@@ -437,7 +436,6 @@ serious	93
 represent	93
 indeed	93
 receive	93
-10	93
 room	93
 love	92
 age	92
@@ -523,7 +521,6 @@ field	81
 former	81
 doubt	81
 prepare	80
-2	80
 activity	80
 choose	80
 financial	80
@@ -553,7 +550,6 @@ establish	77
 poetry	77
 sign	77
 chairman	77
-3	77
 minute	77
 single	76
 speak	76
@@ -601,7 +597,6 @@ protestant	70
 popular	70
 food	70
 instead	70
-20	70
 product	70
 ago	70
 current	70
@@ -704,16 +699,12 @@ pull	60
 deep	60
 unite	60
 reveal	60
-4	60
-15	60
 opposition	59
 roman	59
 pressure	59
 culture	59
 bear	59
 twenty	59
-5	59
-w	59
 care	59
 brain	59
 operation	59
@@ -944,7 +935,6 @@ inside	46
 instance	46
 michael	46
 push	46
-100	46
 organisation	46
 occur	46
 arrive	46
@@ -974,7 +964,6 @@ affair	44
 contemporary	44
 failure	44
 treat	44
-25	44
 relative	44
 survive	44
 america	44
@@ -1007,10 +996,7 @@ rock	43
 army	43
 beat	43
 castle	43
-7	43
-12	43
 park	43
-50	43
 credit	43
 format	43
 master	42
@@ -1078,7 +1064,6 @@ stone	40
 shop	40
 window	40
 investor	40
-6	40
 candidate	40
 exactly	39
 conclusion	39
@@ -1107,7 +1092,6 @@ southern	38
 responsibility	38
 bishop	38
 band	38
-v	38
 mode	38
 treatment	38
 miss	38
@@ -1151,12 +1135,10 @@ warn	37
 october	37
 perfect	37
 sea	37
-30	37
 ready	37
 murder	37
 recently	37
 tape	37
-k	37
 evening	37
 crowd	37
 march	37
@@ -1224,7 +1206,6 @@ philosophy	34
 pro	34
 science	34
 refer	34
-b	34
 emerge	34
 forget	34
 companies	34
@@ -1240,7 +1221,6 @@ fur	34
 cup	34
 channel	34
 imagine	34
-40	34
 county	34
 timber	34
 judgement	33
@@ -1288,7 +1268,6 @@ variation	33
 mile	33
 threat	33
 railway	33
-8	33
 fresh	33
 cinema	33
 mainly	33
@@ -1308,7 +1287,6 @@ male	32
 crucial	32
 parliament	32
 unable	32
-18	32
 coverage	32
 re	32
 henry	32
@@ -1354,7 +1332,6 @@ transaction	31
 maximum	31
 average	31
 manufacturer	31
-p	31
 afford	31
 chest	31
 opened	31
@@ -1468,7 +1445,6 @@ rank	28
 initial	28
 output	28
 prize	28
-16	28
 operate	28
 photograph	28
 distinction	28
@@ -1479,7 +1455,6 @@ confidence	28
 democracy	28
 message	28
 hit	28
-27	28
 duke	28
 ball	28
 succeed	28
@@ -1498,7 +1473,6 @@ beauty	28
 opera	28
 nineteen	28
 stamp	28
-r	28
 concerto	28
 progress	28
 clock	28
@@ -1597,7 +1571,6 @@ secret	26
 upper	26
 urban	26
 orchestra	26
-500	26
 rival	26
 poland	26
 enemy	26
@@ -1611,7 +1584,6 @@ deficit	25
 maybe	25
 neither	25
 currency	25
-s	25
 coach	25
 network	25
 frame	25
@@ -1647,7 +1619,6 @@ steel	25
 beautiful	25
 excellent	25
 rough	25
-f	25
 port	25
 bore	25
 spot	25
@@ -1662,7 +1633,6 @@ fifteen	24
 drill	24
 submit	24
 legislation	24
-14	24
 scientific	24
 silence	24
 kitchen	24
@@ -1673,7 +1643,6 @@ arrest	24
 ad	24
 parallel	24
 blood	24
-60	24
 reaction	24
 essay	24
 thrust	24
@@ -1722,7 +1691,6 @@ bright	24
 manchester	24
 exclusive	23
 criminal	23
-9	23
 mount	23
 marriage	23
 minority	23
@@ -1741,7 +1709,6 @@ alongside	23
 defend	23
 check	23
 impressive	23
-c	23
 collapse	23
 oxford	23
 occupy	23
@@ -1749,10 +1716,8 @@ lend	23
 gap	23
 vital	23
 wing	23
-28	23
 recognition	23
 calm	23
-24	23
 policeman	23
 resource	23
 gate	23
@@ -1833,15 +1798,12 @@ anyway	22
 usual	22
 factory	22
 emphasise	22
-o	22
 captain	22
-70	22
 diameter	22
 register	22
 library	22
 location	22
 organise	22
-90	22
 fuel	22
 estate	22
 counterpart	22
@@ -1891,7 +1853,6 @@ flight	21
 voluntary	21
 australia	21
 baker	21
-x	21
 dress	21
 detailed	21
 stewart	21
@@ -1905,8 +1866,6 @@ romeo	21
 saint	21
 equity	21
 embassy	21
-m	21
-200	21
 core	21
 republic	21
 manager	21
@@ -1981,7 +1940,6 @@ excitement	20
 westminster	20
 achievement	20
 ancient	20
-17	20
 selection	20
 perceive	20
 fist	20
@@ -2003,12 +1961,9 @@ communication	20
 states	20
 sister	20
 monitor	20
-22	20
 song	20
-d	20
 lucky	20
 pen	20
-y	20
 forest	20
 native	20
 australian	20
@@ -2160,7 +2115,6 @@ stake	18
 electric	18
 mao	18
 pope	18
-29	18
 seminar	18
 studio	18
 higher	18
@@ -2231,10 +2185,8 @@ fun	17
 twelve	17
 float	17
 visitor	17
-11	17
 sensitive	17
 knee	17
-e	17
 grass	17
 bag	17
 blow	17
@@ -2307,7 +2259,6 @@ extract	16
 abroad	16
 colony	16
 negotiation	16
-80	16
 punishment	16
 routine	16
 offence	16
@@ -2328,7 +2279,6 @@ elbow	16
 boom	16
 code	16
 shoe	16
-t	16
 cap	16
 fairy	16
 rose	16
@@ -2353,7 +2303,6 @@ electricity	16
 similarity	16
 russia	16
 sergeant	16
-35	16
 propaganda	16
 expense	16
 camera	16
@@ -2367,7 +2316,6 @@ assurance	16
 philip	16
 graphics	16
 coast	16
-j	16
 coil	16
 levi	16
 font	16
@@ -2394,7 +2342,6 @@ sophisticate	15
 global	15
 acquisition	15
 possession	15
-32	15
 schedule	15
 fleet	15
 sad	15
@@ -2413,7 +2360,6 @@ profile	15
 indian	15
 compromise	15
 closely	15
-23	15
 lobby	15
 pollution	15
 intense	15
@@ -2531,7 +2477,6 @@ combine	14
 crew	14
 trick	14
 limitation	14
-l	14
 provoke	14
 fiction	14
 humanity	14
@@ -2599,7 +2544,6 @@ khmer	14
 rouge	14
 pot	14
 install	14
-26	14
 forecast	14
 giant	14
 distinct	14
@@ -2680,7 +2624,6 @@ eighty	13
 aggressive	13
 comfortable	13
 tackle	13
-33	13
 improvement	13
 robin	13
 practically	13
@@ -2722,10 +2665,8 @@ sander	13
 arouse	13
 petrol	13
 distribution	13
-300	13
 endorse	13
 reputation	13
-13	13
 tuesday	13
 broker	13
 react	13
@@ -2897,7 +2838,6 @@ commonwealth	12
 freeze	12
 substantial	12
 investigate	12
-150	12
 shell	12
 exhibit	12
 assemble	12
@@ -2914,7 +2854,6 @@ thirteen	12
 auction	12
 revenue	12
 taylor	12
-75	12
 pile	12
 reserve	12
 wildlife	12
@@ -2922,12 +2861,10 @@ brent	12
 billion	12
 consortium	12
 pan	12
-31	12
 economics	12
 motive	12
 barely	12
 warning	12
-g	12
 cattle	12
 exceed	12
 storage	12
@@ -3004,7 +2941,6 @@ repayment	11
 judicial	11
 poison	11
 firms	11
-400	11
 disappoint	11
 initiative	11
 delivery	11
@@ -3013,7 +2949,6 @@ india	11
 tribunal	11
 outcome	11
 countryside	11
-n	11
 advocacy	11
 durham	11
 underneath	11
@@ -3323,7 +3258,6 @@ satisfaction	10
 oversea	10
 airline	10
 br	10
-45	10
 narrator	10
 milton	10
 miller	10
@@ -3343,7 +3277,6 @@ lp	10
 mb	10
 scratch	10
 acetate	10
-72	10
 appellant	10
 impedance	10
 mare	10
@@ -3516,7 +3449,6 @@ rubber	9
 secular	9
 christ	9
 illegal	9
-19	9
 envisage	9
 ballot	9
 stag	9
@@ -3594,7 +3526,6 @@ editorial	9
 demonstrator	9
 researcher	9
 yield	9
-125	9
 opt	9
 button	9
 raper	9
@@ -3692,7 +3623,6 @@ boldly	8
 comedian	8
 controversial	8
 dynamic	8
-46	8
 retreat	8
 harmony	8
 album	8
@@ -3785,7 +3715,6 @@ deem	8
 electronics	8
 solidarity	8
 triumph	8
-21	8
 thorn	8
 burst	8
 pledge	8
@@ -3800,7 +3729,6 @@ neo	8
 doom	8
 incompatible	8
 freight	8
-59	8
 commentary	8
 contra	8
 surrender	8
@@ -3825,7 +3753,6 @@ glide	8
 arranger	8
 lounge	8
 childhood	8
-93	8
 inmate	8
 unemployed	8
 strict	8
@@ -3856,7 +3783,6 @@ sensitivity	8
 tribute	8
 er	8
 circulation	8
-38	8
 instructor	8
 colonel	8
 broadcaster	8
@@ -3890,7 +3816,6 @@ lamp	8
 retirement	8
 variable	8
 cancel	8
-47	8
 continental	8
 bloc	8
 reckon	8
@@ -4103,7 +4028,6 @@ problematic	7
 maintenance	7
 continuously	7
 audit	7
-0	7
 penetrate	7
 dissolve	7
 silk	7
@@ -4134,7 +4058,6 @@ cutter	7
 guideline	7
 valois	7
 scatter	7
-73	7
 arrogance	7
 pepper	7
 porter	7
@@ -4196,7 +4119,6 @@ calibre	7
 whisper	7
 absent	7
 relaxation	7
-48	7
 disperse	7
 surveillance	7
 grief	7
@@ -4315,7 +4237,6 @@ laws	7
 delegation	7
 campus	7
 mandela	7
-34	7
 impartiality	7
 translation	7
 diagram	7
@@ -4366,7 +4287,6 @@ intent	6
 panic	6
 bible	6
 scrutiny	6
-78	6
 tentative	6
 entrepreneurial	6
 articulate	6
@@ -4532,7 +4452,6 @@ steer	6
 frivolous	6
 tchaikovsky	6
 shorter	6
-68	6
 fonteyn	6
 aurora	6
 holding	6
@@ -4546,7 +4465,6 @@ eccentric	6
 basil	6
 frieze	6
 princess	6
-61	6
 ankle	6
 barrie	6
 stout	6
@@ -4582,7 +4500,6 @@ pol	6
 prop	6
 fortnight	6
 concede	6
-76	6
 brand	6
 canadian	6
 missionary	6
@@ -4595,7 +4512,6 @@ visionary	6
 tudor	6
 ravage	6
 children	6
-41	6
 rite	6
 layout	6
 exotic	6
@@ -4721,7 +4637,6 @@ combat	6
 poorer	6
 plaintiff	6
 creditor	6
-36	6
 issuer	6
 jurisdiction	6
 wilkinson	6
@@ -4770,7 +4685,6 @@ axle	6
 responsive	6
 junior	6
 supervision	6
-h	6
 animate	6
 raf	6
 reported	6
@@ -4974,7 +4888,6 @@ fulfil	5
 handling	5
 beneficial	5
 nicholas	5
-85	5
 precious	5
 masculine	5
 generalize	5
@@ -5173,14 +5086,12 @@ scar	5
 pakistani	5
 uniforms	5
 oxide	5
-44	5
 germinate	5
 adjacent	5
 cotton	5
 wool	5
 fitting	5
 axe	5
-42	5
 carbon	5
 loath	5
 invade	5
@@ -5209,7 +5120,6 @@ dismissal	5
 steinberg	5
 crude	5
 premiere	5
-56	5
 monotone	5
 elgar	5
 aristotle	5
@@ -5266,7 +5176,6 @@ dining	5
 watt	5
 overtime	5
 organizational	5
-62	5
 stalk	5
 lapse	5
 yearly	5
@@ -5300,7 +5209,6 @@ norwegian	5
 tavern	5
 cafe	5
 drastic	5
-37	5
 manx	5
 liquidation	5
 allen	5
@@ -5411,7 +5319,6 @@ embody	5
 balloon	5
 hockey	5
 devotion	5
-55	5
 harlequin	5
 marsh	5
 korean	5
@@ -5424,7 +5331,6 @@ evaluative	5
 woodcarver	5
 grandfather	5
 spindle	5
-64	5
 laser	5
 rom	5
 mackintosh	5
@@ -5675,7 +5581,6 @@ semiotics	4
 gregory	4
 primacy	4
 insecurity	4
-91	4
 disguise	4
 lesbian	4
 taker	4
@@ -5758,7 +5663,6 @@ foliage	4
 implausible	4
 flick	4
 melodic	4
-83	4
 godmother	4
 closed	4
 adage	4
@@ -5776,7 +5680,6 @@ elation	4
 sorrow	4
 triumphant	4
 purposeful	4
-88	4
 rebirth	4
 lager	4
 notch	4
@@ -5896,7 +5799,6 @@ recount	4
 elusive	4
 intimacy	4
 splendid	4
-10000	4
 aesthetically	4
 thwart	4
 wildly	4
@@ -6034,7 +5936,6 @@ campaigning	4
 incompetence	4
 failing	4
 pervasive	4
-65	4
 abound	4
 conceal	4
 caricature	4
@@ -6061,7 +5962,6 @@ registry	4
 annually	4
 thief	4
 stronghold	4
-84	4
 incapable	4
 auckland	4
 commonly	4
@@ -6097,7 +5997,6 @@ drawn	4
 richards	4
 bomber	4
 stile	4
-54	4
 abolition	4
 equality	4
 quaint	4
@@ -6129,7 +6028,6 @@ emergence	4
 alehouse	4
 aids	4
 regulate	4
-67	4
 inspectors	4
 hq	4
 tunics	4
@@ -6181,7 +6079,6 @@ visibility	4
 fulfill	4
 reformation	4
 simplify	4
-63	4
 terry	4
 organizer	4
 enlighten	4
@@ -6292,7 +6189,6 @@ duncan	4
 recordings	4
 topsoil	4
 gang	4
-u	4
 berliner	4
 melody	4
 copyright	4
@@ -6551,7 +6447,6 @@ slither	3
 biscuit	3
 fowler	3
 fond	3
-82	3
 reconsider	3
 inaugurate	3
 pedigree	3
@@ -6566,7 +6461,6 @@ emu	3
 eminence	3
 testing	3
 prudent	3
-1000	3
 symbolise	3
 offing	3
 rouble	3
@@ -7161,7 +7055,6 @@ granada	3
 archaeologist	3
 caribbean	3
 discretionary	3
-57	3
 provider	3
 franc	3
 gloucestershire	3
@@ -7295,7 +7188,6 @@ anomaly	3
 struck	3
 oratorio	3
 consciously	3
-71	3
 familiarity	3
 technician	3
 categorize	3
@@ -7396,7 +7288,6 @@ internally	3
 dulcimer	3
 repay	3
 applicable	3
-170	3
 electrification	3
 reuse	3
 trailer	3
@@ -7423,7 +7314,6 @@ racer	3
 belgium	3
 quota	3
 jimmy	3
-77	3
 debacle	3
 totalitarian	3
 unbreakable	3
@@ -7439,12 +7329,10 @@ albania	3
 timothy	3
 quirky	3
 payable	3
-66	3
 marketer	3
 overpower	3
 impersonal	3
 unpredictable	3
-105	3
 plank	3
 sr	3
 directory	3
@@ -7539,7 +7427,6 @@ eschew	3
 trades	3
 operatic	3
 displace	3
-53	3
 scroll	3
 bike	3
 th	3
@@ -7734,7 +7621,6 @@ convolute	3
 pollster	3
 fillip	3
 submarine	3
-q	3
 wheeling	3
 articles	3
 berry	3
