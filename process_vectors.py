@@ -1,113 +1,58 @@
 # python3
 # coding: utf-8
 
-import argparse
-import pickle
-from gensim.matutils import unitvec
-from scipy.stats import ttest_ind as test
+import csv
 from scipy.stats import spearmanr
 from smart_open import open
-from elmo_helpers import *
 import sys
-from nltk.corpus import wordnet as wn
+import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    arg = parser.add_argument
-    arg('--input', '-i', help='Path to output pickle', required=True)
-    arg('--norm', '-n', help='Normalize vectors?', default=False, action='store_true')
-    parser.add_argument('--mode', '-m', default='centroid', required=True,
-                        choices=['centroid', 'pairwise'])
+    data = {}
+    with open(sys.argv[1], 'r') as f:
+        reader = csv.DictReader(f, delimiter='\t')
+        for row in reader:
+            word = row['Word']
+            data[word] = row
 
-    # arg('--tagger', '-t', help='Path to UDPipe model', required=True)
+    limits = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130]
 
-    parser.set_defaults(norm=False)
-    args = parser.parse_args()
-    data_path = args.input
+    figure, ax = plt.subplots()
 
-    # model = Model.load(args.tagger)
-    # pipeline = Pipeline(model, 'tokenize', Pipeline.DEFAULT, Pipeline.DEFAULT, 'conllu')
+    diversity_scores = []
+    jsd_scores = []
+    freq_scores = []
 
-    with open(args.input, 'rb') as f:
-        sentences, vectors, freq_dict, ambig_words = pickle.load(f)
+    for l in limits:
+        words = [w for w in data if int(data[w]['Frequency']) > l]
+        print('Words to test: %d, frequency limit: %d' % (len(words), l), file=sys.stderr)
 
-    print('Words to test:', len(freq_dict), file=sys.stderr)
-    vector_size = vectors[0].shape[1]
+        diversity_degrees = [float(data[w]['Diversity']) for w in words]
+        cluster_degrees = [float(data[w]['Clusters']) for w in words]
+        frequencies = [float(data[w]['Frequency']) for w in words]
+        wfrequencies = [float(data[w]['WikiFreq']) for w in words]
+        nr_synsets = [float(data[w]['Synsets']) for w in words]
 
-    representations = {w: np.zeros((freq_dict[w], vector_size)) for w in freq_dict}
-    counters = {w: 0 for w in freq_dict}
+        print('Spearman correlation between diversity and the number of WordNet synsets: %.4f, %.4f'
+              % spearmanr(diversity_degrees, nr_synsets))
+        diversity_scores.append(spearmanr(diversity_degrees, nr_synsets)[0])
+        print('Spearman correlation between cluster number and the number of WordNet synsets: '
+              '%.4f, %.4f' % spearmanr(cluster_degrees, nr_synsets))
+        jsd_scores.append(spearmanr(cluster_degrees, nr_synsets)[0])
+        print('Spearman correlation between SensEval frequency and the number of WordNet synsets: '
+              '%.4f, %.4f' % spearmanr(frequencies, nr_synsets))
+        freq_scores.append(spearmanr(frequencies, nr_synsets)[0])
+        print('Spearman correlation between Wikipedia frequency and the number of WordNet synsets: '
+              '%.4f, %.4f' % spearmanr(wfrequencies, nr_synsets))
 
-    for sent, matrix in zip(sentences, vectors):
-        for word, vector in zip(sent, matrix):
-            if word in representations:
-                if args.norm:
-                    representations[word][counters[word], :] = unitvec(vector)
-                else:
-                    representations[word][counters[word], :] = vector
-                counters[word] += 1
+    ax.plot(limits, diversity_scores, label='DIV', marker='o')
+    ax.plot(limits, jsd_scores, label='JSD', marker='o')
+    ax.plot(limits, freq_scores, label='Frequency', marker='o')
+    ax.set(xlabel='Minimal word frequency', ylabel='Spearman correlation',
+           title='Ambiguity correlations')
+    ax.grid()
+    ax.legend(loc='best')
+    figure.savefig('ambiguity.png', dpi=300)
+    plt.close()
 
-    vectors = None
-
-    if args.mode == 'centroid':
-        diversities = {w: diversity(representations[w]) for w in representations}
-    else:
-        diversities = {w: pairwise_diversity(representations[w]) for w in representations}
-
-    ambig_freqs = [freq_dict[w] for w in ambig_words]
-    mean_amb_freq = np.mean(ambig_freqs)
-    std_amb_freq = np.std(ambig_freqs)
-    print('Ambiguous frequencies: %.4f, %.4f' % (float(mean_amb_freq), float(std_amb_freq)))
-    min_freq = int(mean_amb_freq - std_amb_freq)
-    max_freq = int(mean_amb_freq + std_amb_freq)
-
-    diversities_ambig = [diversities[w] for w in diversities if w in ambig_words]
-    # print(ambig_words)
-
-    common_words_test = [w for w in diversities if w not in ambig_words
-                         and 100 < freq_dict[w] < 400]
-    # common_tagged = [tag(pipeline, w) for w in common_words_test]
-    # common_words_test = [w.split('_')[0] for w in common_tagged if w.endswith('_NOUN')]
-    # common_words_test = {w for w in common_words_test if w in diversities}
-    # print(common_words_test)
-
-    diversities_common = [diversities[w] for w in common_words_test]
-    common_freqs = [freq_dict[w] for w in common_words_test]
-    print('Common frequencies: %.4f, %.4f' %
-          (float(np.mean(common_freqs)), float(np.std(common_freqs))))
-
-    for nr, dataset in enumerate([diversities_ambig, diversities_common]):
-        print(nr, 'Words:', len(dataset))
-        print('Average diversity: %.4f' % np.mean(dataset))
-        print('Diversity std: %.4f' % np.std(dataset))
-
-    print('T-test (difference and p-value): %.4f, %.4f' %
-          test(diversities_ambig, diversities_common, equal_var=False))
-
-    diversity_degrees = []
-    frequencies = []
-    nr_synsets = []
-
-    print('===================')
-    common_diversities = {w: diversities[w] for w in common_words_test}
-    for word in sorted(common_diversities, key=common_diversities.get, reverse=True):
-        synsets = len(wn.synsets(word))
-        if synsets > 0:
-            diversity_degrees.append(common_diversities[word])
-            frequencies.append(freq_dict[word])
-            nr_synsets.append(synsets)
-
-    print('===================')
-    amb_diversities = {w: diversities[w] for w in ambig_words}
-    for word in sorted(amb_diversities, key=amb_diversities.get, reverse=True):
-        # print(word, round(amb_diversities[word], 3), len(wn.synsets(word)))
-        synsets = len(wn.synsets(word))
-        if synsets > 0:
-            diversity_degrees.append(amb_diversities[word])
-            frequencies.append(freq_dict[word])
-            nr_synsets.append(synsets)
-
-    print('Words with at least 1 synset:', len(diversity_degrees))
-    print('Spearman correlation between diversity and the number of WordNet synsets: %.4f, %.4f'
-          % spearmanr(diversity_degrees, nr_synsets))
-    print('Spearman correlation between frequency and the number of WordNet synsets: %.4f, %.4f'
-          % spearmanr(frequencies, nr_synsets))
+# ''
