@@ -54,5 +54,3 @@ if __name__ == '__main__':
     ax.legend(loc='best')
     figure.savefig('ambiguity.png', dpi=300)
     plt.close()
-
-# ''
