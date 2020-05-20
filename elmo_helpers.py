@@ -13,6 +13,7 @@ from scipy.stats import entropy
 from scipy.spatial.distance import cosine
 from sklearn.cluster import DBSCAN, AffinityPropagation
 import logging
+from scipy.spatial.distance import pdist
 
 logger = logging.getLogger(__name__)
 
@@ -108,6 +109,7 @@ def load_elmo_embeddings(directory, top=False):
 def divide_chunks(data, n):
     for i in range(0, len(data), n):
         yield data[i:i + n]
+
 
 def calc_diversity(embfile, method="centroid"):
     array = np.load(embfile)

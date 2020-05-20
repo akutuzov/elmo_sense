@@ -54,7 +54,7 @@ if __name__ == '__main__':
            title='Word frequency distribution in COHA')
     ax.grid()
     ax.legend(loc='best')
-    plt.show()
+    plt.savefig('coha_freq.png', dpi=300)
     plt.close()
 
     sort_word = sorted(valid_dictionary, key=valid_dictionary.get, reverse=True)
