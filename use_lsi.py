@@ -91,6 +91,10 @@ if __name__ == '__main__':
 
     logger.info('Calculating densities...')
     for word in target_words:
+        if len(data[word][0]) < 1 or len(data[word][1]) < 1:
+            logger.info('%s omitted because of low frequency' % word)
+            print('\t'.join([word, '10']), file=f_out)
+            continue
         old_vectors = np.stack(data[word][0], axis=0)
         new_vectors = np.stack(data[word][1], axis=1)
         distances0 = cdist(old_vectors, old_vectors, metric='cosine')
