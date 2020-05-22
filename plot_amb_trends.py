@@ -102,7 +102,7 @@ if __name__ == '__main__':
         year_changes[el[1]].append(el[2])
 
     for year in year_changes:
-        print(year, np.mean(year_changes[year]))
+        print(year, round(np.mean(year_changes[year]), 3))
     sorted_doubles = sorted(year_changes.keys())
     double_labels = [el[0] + '-' + el[1] for el in sorted_doubles]
 
