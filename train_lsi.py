@@ -7,12 +7,13 @@ from gensim.models import LsiModel, word2vec
 
 if __name__ == '__main__':
     textfile = sys.argv[1]
+    run_name = sys.argv[2]
 
     texts = word2vec.LineSentence(textfile)
 
     print('Building dictionary...', file=sys.stderr)
     dictionary = Dictionary(texts, prune_at=40000)
-    dictionary.save('lsi.dic')
+    dictionary.save(run_name + '_lsi.dic')
 
     texts = word2vec.LineSentence(textfile)
     print('Vectorizing lines...', file=sys.stderr)
@@ -20,4 +21,4 @@ if __name__ == '__main__':
 
     print('Building LSI model...', file=sys.stderr)
     model = LsiModel(corpus, id2word=dictionary, num_topics=100)
-    model.save('lsi.model')
+    model.save(run_name + '_lsi.model')
