@@ -26,15 +26,15 @@ if __name__ == '__main__':
     if args.calc == 'npz':
 
         e_60 = np.load(os.path.join(args.input, '1960.npz'))
-        logger.info('Loaded an array of %d entries from %s' % (len(e_60), '1960.npz'))
+        logger.info('Loaded an array of {} entries from 1960.npz'.format(len(e_60)))
         e_70 = np.load(os.path.join(args.input, '1970.npz'))
-        logger.info('Loaded an array of %d entries from %s' % (len(e_70), '1970.npz'))
+        logger.info('Loaded an array of {} entries from 1970.npz'.format(len(e_70)))
         e_80 = np.load(os.path.join(args.input, '1980.npz'))
-        logger.info('Loaded an array of %d entries from %s' % (len(e_80), '1980.npz'))
+        logger.info('Loaded an array of {} entries from 1980.npz'.format(len(e_80)))
         e_90 = np.load(os.path.join(args.input, '1990.npz'))
-        logger.info('Loaded an array of %d entries from %s' % (len(e_90), '1990.npz'))
+        logger.info('Loaded an array of {} entries from 1990.npz'.format(len(e_90)))
         e_00 = np.load(os.path.join(args.input, '2000.npz'))
-        logger.info('Loaded an array of %d entries from %s' % (len(e_00), '2000.npz'))
+        logger.info('Loaded an array of {} entries from 2000.npz'.format(len(e_00)))
 
         words = e_00.files
 
@@ -46,7 +46,7 @@ if __name__ == '__main__':
                     valid = False
                     break
             if not valid:
-                print('%s too rare! Skipping.' % word)
+                logger.info('{} too rare! Skipping.'.format(word))
                 continue
             coeffs[word] = []
             for decade in [e_60, e_70, e_80, e_90, e_00]:
@@ -55,7 +55,7 @@ if __name__ == '__main__':
         logger.info('Finished!')
 
     else:
-        logger.info('Loading diversities from %s...' % args.input)
+        logger.info('Loading diversities from {}...'.format(args.input))
         with open(args.input, 'r') as f:
             for line in f:
                 res = line.strip().split('\t')
@@ -64,15 +64,14 @@ if __name__ == '__main__':
 
     for word in coeffs:
         plot.plot(int_years, coeffs[word], label=word)
-    plot_title = 'Changes in word ambiguity over time, %s frequency' \
-                 % args.input.split('/')[-1].split('_')[2].split('.')[0]
+    plot_title = 'Changes in word ambiguity over time, {} frequency'.format(
+        args.input.split('/')[-1].split('_')[2].split('.')[0])
     plot.title(plot_title)
     plot.xticks(int_years)
     plot.xlabel('Decades')
     plot.ylabel('ELMo diversity coefficients')
-    plot.savefig('%s_%s_elmo_dia_all.png' % (args.model,
-                                             args.input.split('/')[-1].split('_')[2].
-                                             split('.')[0]), dpi=300)
+    plot.savefig('{0}_{1}_elmo_dia_all.png'.format(
+        args.model, args.input.split('/')[-1].split('_')[2].split('.')[0]), dpi=300)
     plot.close()
     plot.clf()
 
@@ -102,23 +101,22 @@ if __name__ == '__main__':
         year_changes[el[1]].append(el[2])
 
     for year in year_changes:
-        print(year, round(np.mean(year_changes[year]), 3))
+        logger.info('{} change: {}'.format(year, np.mean(year_changes[year])))
     sorted_doubles = sorted(year_changes.keys())
     double_labels = [el[0] + '-' + el[1] for el in sorted_doubles]
 
     plot.clf()
     plot.bar(range(len(sorted_doubles)), [np.mean(year_changes[year]) for year in sorted_doubles],
              tick_label=double_labels, color='red')
-    plot_title = 'Average changes in lexical ambiguity per decade, %s frequency' \
-                 % args.input.split('/')[-1].split('_')[2].split('.')[0]
+    plot_title = 'Average changes in lexical ambiguity per decade, {} frequency'.format(
+        args.input.split('/')[-1].split('_')[2].split('.')[0])
     plot.title(plot_title)
     plot.xticks()
     plot.xlabel('Transitions between decades')
     plot.ylabel('Change in the average ELMo variation coefficients')
     plot.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.4f}'))
-    plot.savefig('%s_%s_elmo_dia_years.png' % (args.model,
-                                               args.input.split('/')[-1].split('_')[2].
-                                               split('.')[0]), dpi=300)
+    plot.savefig('{0}_{1}_elmo_dia_years.png'.format(
+        args.model, args.input.split('/')[-1].split('_')[2].split('.')[0]), dpi=300)
     plot.close()
     plot.clf()
 
