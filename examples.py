@@ -9,17 +9,20 @@ if __name__ == '__main__':
     word_file = sys.argv[1]
     out_file = sys.argv[2]
 
+    WORD_LIMIT = 400
+    WINDOW = 10
+
     words = {}
     for line in open(word_file).readlines():
-        res = line.strip().split('\t')
-        word = res[0].strip()
+        word = line.strip()
         words[word] = []
 
     for line in sys.stdin:
-        sentence = line.strip()
-        for w in sentence.split():
-            if w in words:
-                words[w].append(sentence)
+        res = line.strip().split()[:WORD_LIMIT]
+        for nr, word in enumerate(res):
+            if word in words:
+                context = ' '.join(res[nr-WINDOW:nr+WINDOW])
+                words[word].append(context)
 
     print('Reading complete', file=sys.stderr)
     for word in words:
