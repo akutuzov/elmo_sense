@@ -412,6 +412,7 @@ cecilia
 cede
 ceiling
 celestial
+cell
 cemeteries
 censor
 cent
@@ -926,6 +927,7 @@ factually
 fainter
 fairly
 fairy
+faith
 falconry
 fallback
 falle
@@ -1961,6 +1963,7 @@ petersen
 pharisee
 phenomenology
 philanderer
+phone
 photographer
 photographic
 photography
