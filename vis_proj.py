@@ -5,42 +5,44 @@ import sys
 import pylab as plot
 import numpy as np
 from sklearn.decomposition import PCA
+import logging
 
 if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+    logger = logging.getLogger(__name__)
+
     file2process = sys.argv[1]
-    out = sys.argv[2]
 
-    labels = False
+    LABELS = False
 
-    array = np.load(file2process)['arr_0']
-    word = file2process.split('/')[-1].split('.')[0]
-    year = file2process.split('/')[-2]
-    print('Number of points:', array.shape[0], file=sys.stderr)
+    embeddings = np.load(file2process)
+    words = embeddings.files
 
-    embedding = PCA(n_components=2)
-    # perplexity = 1000.0  # Should be smaller than the number of points!
-    # embedding = TSNE(n_components=2, perplexity=perplexity, metric='cosine',
-    #                      n_iter=500, init='pca')
+    year = file2process.split('/')[-1].split('.')[0]
 
-    y = embedding.fit_transform(array)
+    for word in words:
+        array = embeddings[word]
+        logger.info('{}, number of points: {}'.format(word, array.shape[0]))
 
-    print('2-d embedding finished', file=sys.stderr)
+        embedding = PCA(n_components=2)
+        y = embedding.fit_transform(array)
 
-    xpositions = y[:, 0]
-    ypositions = y[:, 1]
+        xpositions = y[:, 0]
+        ypositions = y[:, 1]
 
-    plot.clf()
+        plot.clf()
 
-    if labels:
-        for x, y, nr in zip(xpositions, ypositions, range(len(xpositions))):
-            plot.scatter(x, y, 2, marker='*', color='green')
-            plot.annotate(nr, xy=(x+1, y), size=2, color='green')
-    else:
-        plot.scatter(xpositions, ypositions, 5, marker='*', color='green')
-    plot.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
-    plot.tick_params(axis='y', which='both', left=False, right=False, labelleft=False)
-    plot.title(' '.join([word, 'in', year+ "'s"]))
+        if LABELS:
+            for x, y, nr in zip(xpositions, ypositions, range(len(xpositions))):
+                plot.scatter(x, y, 2, marker='*', color='green')
+                plot.annotate(nr, xy=(x+1, y), size=2, color='green')
+        else:
+            plot.scatter(xpositions, ypositions, 5, marker='*', color='green')
+        plot.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+        plot.tick_params(axis='y', which='both', left=False, right=False, labelleft=False)
+        plot.title("{} in {}'s".format(word, year))
+        out = "{}_{}".format(word, year)
 
-    plot.savefig(out + '_' + 'PCA.png', dpi=600, bbox_inches='tight')
-    plot.close()
-    plot.clf()
+        plot.savefig(out + 'PCA.png', dpi=600, bbox_inches='tight')
+        plot.close()
+        plot.clf()

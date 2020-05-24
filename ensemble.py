@@ -1,13 +1,12 @@
 #!/bin/env/ python3
 
-from os import path
 import sys
 from smart_open import open
 import numpy as np
 
 
 file0 = sys.argv[1]
-file1 = sys.argv[2
+file1 = sys.argv[2]
 
 
 cos_scores = {}
@@ -35,5 +34,5 @@ for word in cos_scores:
 ensemble_file = sys.argv[3]
 with open(ensemble_file, 'w') as f:
     for word in ensemble_scores:
-        f.write('\t'.join([word, str(ensemble_scores[word], str(frequneices[word])) + '\n']))
+        f.write('\t'.join([word, str(ensemble_scores[word]), str(frequencies[word])]) + '\n')
 
