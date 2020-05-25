@@ -1,29 +1,42 @@
 # python3
 # coding: utf-8
 
-import sys
 import pylab as plot
 import numpy as np
 from sklearn.decomposition import PCA
 import logging
+import argparse
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     logger = logging.getLogger(__name__)
 
-    file2process = sys.argv[1]
+    parser = argparse.ArgumentParser()
+    arg = parser.add_argument
+    arg('--input', '-i', help='Path to the npz file', required=True)
+    arg('--word', '-w', help='Ask for a specific word')
+    arg('--labels', '-l', help='Plot labels?', action="store_true")
+    args = parser.parse_args()
 
-    LABELS = False
+    if args.labels:
+        LABELS = True
+    else:
+        LABELS = False
 
-    embeddings = np.load(file2process)
-    words = embeddings.files
+    embeddings = np.load(args.input)
 
-    year = file2process.split('/')[-1].split('.')[0]
+    if args.word:
+        words = [args.word]
+    else:
+        words = embeddings.files
+
+    year = args.input.split('/')[-1].split('.')[0]
 
     for word in words:
         array = embeddings[word]
         logger.info('{}, number of points: {}'.format(word, array.shape[0]))
-
+        if array.shape[0] < 3:
+            continue
         embedding = PCA(n_components=2)
         y = embedding.fit_transform(array)
 
@@ -43,6 +56,6 @@ if __name__ == '__main__':
         plot.title("{} in {}'s".format(word, year))
         out = "{}_{}".format(word, year)
 
-        plot.savefig(out + 'PCA.png', dpi=600, bbox_inches='tight')
+        plot.savefig(out + '_PCA.png', dpi=300, bbox_inches='tight')
         plot.close()
         plot.clf()
