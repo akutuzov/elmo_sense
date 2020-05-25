@@ -22,7 +22,7 @@ if __name__ == '__main__':
         for nr, word in enumerate(res):
             if word in words:
                 if nr < WINDOW:
-                     context = ' '.join(res[:nr+WINDOW])
+                    context = ' '.join(res[:nr+WINDOW])
                 else:
                     context = ' '.join(res[nr-WINDOW:nr+WINDOW])
                 words[word].append(context)
