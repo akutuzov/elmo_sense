@@ -15,8 +15,7 @@ print('Number of {} occurrences in {}: {}'.format(word, file2load, len(corpus[wo
 
 while True:
     query = input("Enter occurrence number:")
-    word, nr = query.strip().split()
-    nr = int(nr)
+    nr = int(query)
     try:
         print(corpus[word][nr])
     except IndexError:
