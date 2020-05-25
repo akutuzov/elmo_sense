@@ -25,7 +25,7 @@ def main():
     if args.out:
         out_path = args.out
     else:
-        out_path = args.targer + '.png'
+        out_path = args.target + '.png'
 
     usages1 = np.load(npz1)
     usages2 = np.load(npz2)
@@ -62,7 +62,7 @@ def main():
     for matrix, label, color in zip(usages, labels, colors):
         plt.scatter(matrix[:, 0], matrix[:, 1], c=color, s=20)
 
-    plt.legend(labels, prop={'size': 15}, location="best")
+    plt.legend(labels, prop={'size': 15}, loc="best")
 
     plt.savefig(out_path)
     print('Saved plot to file: {}'.format(out_path))
