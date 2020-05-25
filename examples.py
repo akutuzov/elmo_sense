@@ -21,7 +21,10 @@ if __name__ == '__main__':
         res = line.strip().split()[:WORD_LIMIT]
         for nr, word in enumerate(res):
             if word in words:
-                context = ' '.join(res[nr-WINDOW:nr+WINDOW])
+                if nr < WINDOW:
+                     context = ' '.join(res[:nr+WINDOW])
+                else:
+                    context = ' '.join(res[nr-WINDOW:nr+WINDOW])
                 words[word].append(context)
 
     print('Reading complete', file=sys.stderr)
