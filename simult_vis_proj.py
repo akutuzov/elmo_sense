@@ -21,7 +21,8 @@ def main():
     arg('--out', '-o', help='Output path for the PCA plot', action="store_true")
     args = parser.parse_args()
 
-    embedding_files = [f.name for f in os.scandir(args.input) if f.name.endswith('.npz') and f.is_file()]
+    embedding_files = [f.name for f in os.scandir(args.input)
+                       if f.name.endswith('.npz') and f.is_file()]
 
     embeddings = {year.split('.')[0]: None for year in embedding_files}
 
@@ -53,10 +54,10 @@ def main():
     colors = plt.cm.Set1(np.linspace(0, 1, len(class_set)))
 
     for year in class_set:
-        rows = [x==year for x in class_labels]
+        rows = [x == year for x in class_labels]
         matrix = x_2d[rows]
         plt.scatter(matrix[:, 0], matrix[:, 1], color=colors[class_set.index(year)], marker='*',
-                s=40, label=year)
+                    s=40, label=year)
 
     plt.legend(prop={'size': 15}, loc="best")
 
