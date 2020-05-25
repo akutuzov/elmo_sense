@@ -21,7 +21,7 @@ def main():
     arg('--out', '-o', help='Output path for the PCA plot', action="store_true")
     args = parser.parse_args()
 
-    embedding_files = [f for f in os.scandir(args.input) if f.endswith('.npz')]
+    embedding_files = [f.name for f in os.scandir(args.input) if f.name.endswith('.npz') and f.is_file()]
 
     embeddings = {year.split('.')[0]: None for year in embedding_files}
 
@@ -40,23 +40,23 @@ def main():
 
     class_labels = []
     for el in sorted(embeddings):
-        class_labels.append([el] * len(embeddings[el]))
+        class_labels += [el] * len(embeddings[el])
 
     x = StandardScaler().fit_transform(x)
     x_2d = PCA(n_components=2).fit_transform(x)
 
     plt.figure(figsize=(15, 15))
     plt.xticks([]), plt.yticks([])
-    plt.title("'{}'\n".format(target), fontsize=20)
+    plt.title("{} in all decades\n".format(target), fontsize=20)
 
-    class_set = [c for c in set(class_labels)]
-    colors = plt.cm.rainbow(np.linspace(0, 1, len(class_set)))
-    class2color = [colors[class_set.index(w)] for w in class_labels]
+    class_set = sorted([c for c in set(class_labels)])
+    colors = plt.cm.Set1(np.linspace(0, 1, len(class_set)))
 
-    seen = set()
-    for vector, label, color in zip(x_2d, class_labels, class2color):
-        plt.scatter(vector[0], vector[1], c=color, s=20, label=label if label not in seen else "")
-        seen.add(label)
+    for year in class_set:
+        rows = [x==year for x in class_labels]
+        matrix = x_2d[rows]
+        plt.scatter(matrix[:, 0], matrix[:, 1], color=colors[class_set.index(year)], marker='*',
+                s=40, label=year)
 
     plt.legend(prop={'size': 15}, loc="best")
 
