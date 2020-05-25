@@ -49,12 +49,13 @@ if __name__ == '__main__':
             for x, y, nr in zip(xpositions, ypositions, range(len(xpositions))):
                 plot.scatter(x, y, 2, marker='*', color='green')
                 plot.annotate(nr, xy=(x+1, y), size=2, color='green')
+            out = "{}_{}_labels".format(word, year)
         else:
             plot.scatter(xpositions, ypositions, 5, marker='*', color='green')
+            out = "{}_{}".format(word, year)
         plot.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
         plot.tick_params(axis='y', which='both', left=False, right=False, labelleft=False)
         plot.title("{} in {}'s".format(word, year))
-        out = "{}_{}".format(word, year)
 
         plot.savefig(out + '_PCA.png', dpi=300, bbox_inches='tight')
         plot.close()
