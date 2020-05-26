@@ -61,7 +61,7 @@ def main():
 
     plt.legend(prop={'size': 15}, loc="best")
 
-    plt.savefig(out_path)
+    plt.savefig(out_path, dpi=300, bbox_inches='tight')
     print('Saved plot to file: {}'.format(out_path))
 
 

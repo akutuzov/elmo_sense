@@ -48,7 +48,7 @@ if __name__ == '__main__':
         if LABELS:
             for x, y, nr in zip(xpositions, ypositions, range(len(xpositions))):
                 plot.scatter(x, y, 2, marker='*', color='green')
-                plot.annotate(nr, xy=(x+1, y), size=2, color='green')
+                plot.annotate(nr, xy=(x, y), size=2, color='green')
             out = "{}_{}_labels".format(word, year)
         else:
             plot.scatter(xpositions, ypositions, 5, marker='*', color='green')
