@@ -11,7 +11,7 @@ import random
 if __name__ == '__main__':
     filesdir = sys.argv[1]
 
-    vocfiles = [f for f in os.scandir(filesdir) if f.endswith('_vocab.txt.gz')]
+    vocfiles = [f for f in os.scandir(filesdir) if f.name.endswith('_vocab.txt.gz')]
 
     vocs = []
     for f in vocfiles:
