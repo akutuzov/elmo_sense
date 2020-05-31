@@ -6,6 +6,8 @@ from elmo_helpers import *
 import pylab as plot
 from matplotlib.ticker import StrMethodFormatter
 from operator import itemgetter
+from scipy.stats import spearmanr
+from smart_open import open
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -14,6 +16,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     arg = parser.add_argument
     arg('--input', '-i', help='Path to the directory with npz files or to the csv', required=True)
+    arg('--vocs', '-v', help='Path to the directory with decades frequency vocabularies')
     arg('--model', '-m', help='Name of the model', default='wikipedia')
     arg('--calc', '-c', help='Calculate from npz or tak from csv?', choices=['npz', 'csv'],
         default='npz')
@@ -77,22 +80,40 @@ if __name__ == '__main__':
 
     changes = []
 
+    vocs = None
+    if args.vocs:
+        logger.info('Loading frequency vocabularies...')
+        vocfiles = [f for f in os.scandir(args.vocs) if f.name.endswith('_vocab.txt.gz')]
+        vocs = {}
+        for f in vocfiles:
+            year = f.name.split('_')[0]
+            vocabulary = {}
+            for line in open(os.path.join(args.vocs, f), 'r'):
+                res = line.strip().split('\t')
+                word, wordfreq = res
+                vocabulary[word.strip()] = int(wordfreq)
+            vocs[year] = vocabulary
+
     for word in coeffs:
         for i in range(len(coeffs[word]) - 1):
             diff = round(coeffs[word][i + 1] - coeffs[word][i], 4)
-            out = (word, (str(int_years[i]), str(int_years[i + 1])), diff)
+            if args.vocs:
+                freqdiff = abs(vocs[str(int_years[i + 1])][word] - vocs[str(int_years[i])][word])
+                out = (word, (str(int_years[i]), str(int_years[i + 1])), diff, freqdiff)
+            else:
+                out = (word, (str(int_years[i]), str(int_years[i + 1])), diff)
             changes.append(out)
 
     sorted_changes = [d for d in sorted(changes, key=itemgetter(2), reverse=True)]
     logger.info('Top 5 with increased ambiguity:')
     for i in sorted_changes[:5]:
         logger.info(i)
-        # interesting_words.add(i[0])
+
     logger.info('=============')
     logger.info('Top 5 with decreased ambiguity:')
     for i in sorted_changes[-5:]:
         logger.info(i)
-        # interesting_words.add(i[0])
+
     logger.info('=============')
     year_changes = {}
     for el in changes:
@@ -104,6 +125,16 @@ if __name__ == '__main__':
         logger.info('{} change: {}'.format(year, np.mean(year_changes[year])))
     sorted_doubles = sorted(year_changes.keys())
     double_labels = [el[0] + '-' + el[1] for el in sorted_doubles]
+
+    if args.vocs:
+        for pair in sorted_doubles:
+            div_changes = [el[2] for el in changes if el[1] == pair]
+            freq_changes = [el[3] for el in changes if el[1] == pair]
+            correlation = spearmanr(div_changes, freq_changes)
+            print('Spearman correlation between diversity changes and frequency changes '
+                  'in {0}: {1:.4f}, {2:.4f}'.format(pair, correlation[0], correlation[1]))
+
+        exit()
 
     plot.clf()
     plot.bar(range(len(sorted_doubles)), [np.mean(year_changes[year]) for year in sorted_doubles],
