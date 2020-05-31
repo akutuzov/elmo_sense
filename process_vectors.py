@@ -21,6 +21,7 @@ if __name__ == '__main__':
 
     diversity_scores = []
     jsd_scores = []
+    density_scores = []
     freq_scores = []
 
     for l in limits:
@@ -29,6 +30,10 @@ if __name__ == '__main__':
 
         diversity_degrees = [float(data[w]['Diversity']) for w in words]
         cluster_degrees = [float(data[w]['Clusters']) for w in words]
+
+        # Convert similarities back to distances:
+        density_degrees = [1 - float(data[w]['Density']) for w in words]
+
         frequencies = [float(data[w]['Frequency']) for w in words]
         wfrequencies = [float(data[w]['WikiFreq']) for w in words]
         nr_synsets = [float(data[w]['Synsets']) for w in words]
@@ -39,15 +44,19 @@ if __name__ == '__main__':
         print('Spearman correlation between cluster number and the number of WordNet synsets: '
               '%.4f, %.4f' % spearmanr(cluster_degrees, nr_synsets))
         jsd_scores.append(spearmanr(cluster_degrees, nr_synsets)[0])
+        print('Spearman correlation between semantic density and the number of WordNet synsets: '
+              '%.4f, %.4f' % spearmanr(density_degrees, nr_synsets))
+        density_scores.append(spearmanr(density_degrees, nr_synsets)[0])
         print('Spearman correlation between SensEval frequency and the number of WordNet synsets: '
               '%.4f, %.4f' % spearmanr(frequencies, nr_synsets))
         freq_scores.append(spearmanr(frequencies, nr_synsets)[0])
         print('Spearman correlation between Wikipedia frequency and the number of WordNet synsets: '
               '%.4f, %.4f' % spearmanr(wfrequencies, nr_synsets))
 
-    ax.plot(limits, diversity_scores, label='DIV', marker='o')
-    ax.plot(limits, jsd_scores, label='JSD', marker='o')
-    ax.plot(limits, freq_scores, label='Frequency', marker='o')
+    ax.plot(limits, diversity_scores, label='ELMo DIV', marker='o')
+    ax.plot(limits, jsd_scores, label='ELMo JSD', marker='o')
+    ax.plot(limits, density_scores, label='Semantic density', marker='o')
+    ax.plot(limits, freq_scores, label='Raw frequency', marker='o')
     ax.set(xlabel='Minimal word frequency', ylabel='Spearman correlation',
            title='Ambiguity correlations')
     ax.grid()

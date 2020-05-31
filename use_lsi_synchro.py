@@ -78,15 +78,14 @@ if __name__ == '__main__':
                 cv = extract_context(target, line, model, WINDOW)
                 data[target][0].append(cv)
 
-
     logger.info('Calculating densities...')
     for word in target_words:
         if len(data[word][0]) < 1:
-            # logger.info('%s omitted because of low frequency' % word)
-            print('\t'.join([word, '10']), file=f_out)
+            logger.info('%s omitted because of low frequency' % word)
+            print('{}\t10'.format(word), file=f_out)
             continue
-        vectors = np.stack(data[word][0], axis=0)
-        distances = cdist(vectors, vectors, metric='cosine')
+        w_vectors = np.stack(data[word][0], axis=0)
+        distances = cdist(w_vectors, w_vectors, metric='cosine')
         similarities = [1 - x for x in distances]
         data[word]['density0'] = np.mean(similarities)
         print('{}\t{}'.format(word, data[word]['density0']), file=f_out)

@@ -40,17 +40,17 @@ if __name__ == '__main__':
 
     frequencies = {w: sum(frequencies[w]) for w in frequencies}
 
-    TOP = 15
-    sorted_changes = [d for d in sorted(changes, key=itemgetter(2), reverse=True)]
+    TOP = 25
+    sorted_changes = [d for d in sorted(changes, key=itemgetter(2), reverse=True) if frequencies[d[0]] > 1000]
     logger.info('Word\tDecades\tDegree\tFrequency')
     logger.info('=============')
     logger.info('Top {} with the strongest change:'.format(TOP))
     for i in sorted_changes[:TOP]:
-        logger.info('{}\t{}\t{}\t{}'.format(i[0], i[1], i[2], frequencies[i[0]]))
+        logger.info('{}\t{}\t{}\t{}'.format(i[0], i[1], round(i[2], 4), frequencies[i[0]], 4))
     logger.info('=============')
     logger.info('Top {} with the weakest change:'.format(TOP))
     for i in sorted_changes[-TOP:]:
-        logger.info('{}\t{}\t{}\t{}'.format(i[0], i[1], i[2], frequencies[i[0]]))
+        logger.info('{}\t{}\t{}\t{}'.format(i[0], i[1], round(i[2], 4), frequencies[i[0]], 4))
     logger.info('=============')
     year_changes = {}
     for el in changes:

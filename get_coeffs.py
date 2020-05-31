@@ -2,8 +2,6 @@
 # coding: utf-8
 
 import argparse
-import sys
-import logging
 from nltk.corpus import wordnet as wn
 from elmo_helpers import *
 
@@ -19,7 +17,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     data_path = args.input
-    target_words = {w.split('\t')[0].strip(): int(w.split('\t')[1]) for w in open(args.target, 'r', encoding='utf-8').readlines()}
+    target_words = {w.split('\t')[0].strip(): int(w.split('\t')[1]) for w in
+                    open(args.target, 'r', encoding='utf-8').readlines()}
 
     array = np.load(data_path)
     logger.info('Loaded an array of %d entries from %s' % (len(array), data_path))
@@ -39,5 +38,6 @@ if __name__ == '__main__':
         diversity_coeff = diversity(vectors)
         nr_clusters = cluster(vectors, 'affinity', word)[0]
         synsets = len(wn.synsets(word))
-        print('\t'.join([word, str(target_words[word]), str(diversity_coeff), str(nr_clusters), str(synsets)]), file=f_out)
+        print('\t'.join([word, str(target_words[word]), str(diversity_coeff), str(nr_clusters),
+                         str(synsets)]), file=f_out)
 

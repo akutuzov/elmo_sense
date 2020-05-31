@@ -9,7 +9,6 @@ import tensorflow as tf
 from bilm import Batcher, BidirectionalLanguageModel, weight_layers
 from sklearn import preprocessing
 import json
-from scipy.stats import entropy
 from scipy.spatial.distance import cosine
 from sklearn.cluster import DBSCAN, AffinityPropagation
 import logging
