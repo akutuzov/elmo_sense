@@ -48,7 +48,7 @@ def main():
 
     plt.figure(figsize=(15, 15))
     plt.xticks([]), plt.yticks([])
-    plt.title("{} in all decades\n".format(target), fontsize=20)
+    plt.title(f"'{target}' in all decades", fontsize=30)
 
     class_set = sorted([c for c in set(class_labels)])
     colors = plt.cm.Set1(np.linspace(0, 1, len(class_set)))
@@ -59,7 +59,7 @@ def main():
         plt.scatter(matrix[:, 0], matrix[:, 1], color=colors[class_set.index(year)], marker='*',
                     s=40, label=year)
 
-    plt.legend(prop={'size': 15}, loc="best")
+    plt.legend(prop={'size': 25}, loc="best")
 
     plt.savefig(out_path, dpi=300, bbox_inches='tight')
     print('Saved plot to file: {}'.format(out_path))
